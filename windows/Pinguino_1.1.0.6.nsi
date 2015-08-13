@@ -443,7 +443,7 @@ Function InstallLibUSB
 	Var /GLOBAL LibUSB
 	Var /GLOBAL LibUSBPath
 
-	ReadRegStr $0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\LibUSB-Win32_is1" "Inno Setup: App Path"
+	ReadRegStr $0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\LibUSB-Win32_is1" "InstallLocation"
 	!insertmacro Message "LibUSB path is $0"
 	IfErrors 0 Done
 	!insertmacro Message "LibUSB $(msg_not_detected)"
