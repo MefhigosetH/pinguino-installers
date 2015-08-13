@@ -444,7 +444,6 @@ Function InstallLibUSB
 	Var /GLOBAL LibUSBPath
 
 	ReadRegStr $0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\LibUSB-Win32_is1" "InstallLocation"
-	!insertmacro Message "LibUSB path is $0"
 	IfErrors 0 Done
 	!insertmacro Message "LibUSB $(msg_not_detected)"
 
@@ -470,9 +469,9 @@ Function InstallLibUSB
 	;Delete "$EXEDIR\$LibUSB"
 
 	Done:
-	!insertmacro Message "LibUSB $(msg_installed)"
-	ReadRegStr $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\LibUSB-Win32_is1\InstallLocation" ""
+	ReadRegStr $0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\LibUSB-Win32_is1" "InstallLocation"
 	StrCpy $LibUSBPath $0
+	!insertmacro Message "LibUSB $(msg_installed) $0"
 
 FunctionEnd
 
