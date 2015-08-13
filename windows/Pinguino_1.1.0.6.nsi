@@ -803,6 +803,8 @@ FunctionEnd
 
 Function InstallPinguinoEnd
 
+	ClearErrors
+	
 	;Update pinguino.bat
 	!insertmacro Message "Updating pinguino.bat ..."
 	FileOpen  $0 "$INSTDIR\pinguino.bat" w
@@ -813,12 +815,12 @@ Function InstallPinguinoEnd
 	FileWrite $0 "$Python27Path\python pinguino.py"
 	FileWrite $0 "$\r$\n"
 	FileClose $0
+	IfErrors Done
 
 	;Update pinguino conf...
 	!insertmacro Message "Updating pinguino.conf ..."
 	Delete "$INSTDIR\user\pinguino.conf"
 	FileOpen  $0 "$INSTDIR\qtgui\config\pinguino.windows.conf" w
-	IfErrors Done
 	FileWrite $0 "[Paths]"
 	FileWrite $0 "$\r$\n"
 	FileWrite $0 "sdcc_bin = $INSTDIR\compilers\p8\bin\"
@@ -830,11 +832,11 @@ Function InstallPinguinoEnd
 	FileWrite $0 "pinguino_32_libs = $INSTDIR\p32\"
 	FileWrite $0 "$\r$\n"
 	FileClose $0
+	IfErrors Done
 
 	;Update pinguino path...
 	!insertmacro Message "Updating pinguino path ..."
 	FileOpen  $0 "$INSTDIR\paths.cfg" w
-	IfErrors Done
 	FileWrite $0 "[paths-windows]"
 	FileWrite $0 "$\r$\n"
 	FileWrite $0 "install_path = $INSTDIR\"
@@ -842,6 +844,7 @@ Function InstallPinguinoEnd
 	FileWrite $0 "user_path = $INSTDIR\user"
 	FileWrite $0 "$\r$\n"
 	FileClose $0
+	IfErrors Done
 
 	;Execute pinguino-ide post_install routine...
 	ExecWait '"$Python27Path\python" "$INSTDIR\post_install.py"' $0
