@@ -461,6 +461,8 @@ Function InstallLibUSB
 	;!insertmacro Download "https://sourceforge.net/projects/libusb-win32/files/libusb-win32-releases/${LIBUSBWIN32_VERSION}" "$LibUSB"
 
 	;ExecWait '"$EXEDIR\$LibUSB"' $0
+	SetOutPath "$INSTDIR\drivers"
+	File /r "drivers\*.*"
 	ExecWait '"$INSTDIR\drivers\$LibUSB"' $0
 	${if} $0 != "0"
 		Abort "LibUSB $(E_installing) $0!"
